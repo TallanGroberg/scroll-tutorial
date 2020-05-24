@@ -1,26 +1,26 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {withTheme} from './provider/ThemeProvider'
+import styled from 'styled-components'
+import cog from './cog.png'
 
-function App() {
+function App(props) {
+  console.log(props)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <img id="big-cog" src={cog} />
+    </Container>
   );
 }
 
-export default App;
+const Container = withTheme(styled.div`
+height: 400vh;
+
+  #big-cog {
+    position: fixed;
+    transform: rotate(${props => props.scrollPosition / 20}deg)
+  }
+`)
+
+export default withTheme(App);
